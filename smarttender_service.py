@@ -116,7 +116,7 @@ def synchronization(string):
 
 def object_field_info(field):
     map = {
-        "assetID": "css=h4>a[href]",
+        "assetID": "css=[data-qa='cdbNumber']",
         "date": "xpath=//*[contains(text(), 'Дата створення')]/../../div[2]/span",
         "rectificationPeriod.endDate": "xpath=//*[@class='key' and contains(text(), 'Період коригування')]/../../div[2]/span",
         "status": "css=.action-block-item.text-center.bold",
@@ -218,7 +218,7 @@ def ss_lot_field_info(field):
         field = "auctions." + list.group('field')
         id = int(list.group('id')) + 1
     map = {
-        "lotID": "css=h4>a[href]",
+        "lotID": "css=[data-qa='cdbNumber']",
         "title": "css=h3>span",
         "status": "css=.action-block-item.text-center.bold",
         "description": "css=div.ivu-card-body .ivu-row>span",
