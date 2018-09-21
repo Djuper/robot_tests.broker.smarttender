@@ -427,11 +427,11 @@ def convert_tender_result(field, value):
         if "value" in field:
             list = re.search(u'(?P<value>[\d\s\.]+) (?P<tr>.+)\. (?P<ty>з ПДВ)', value)
         elif "minimalStep" in field:
-            list = re.search(u'.+ або (?P<value>[\d\s\.]+) грн.', value)
+            list = re.search(u'.+ або (?P<value>[\d\s\.,]+) грн.', value)
         elif "guarantee" in field or "registrationFee" in field:
             list = re.search(u'(?P<value>[\d\s\.]+) грн.', value)
         value = list.group('value')
-        response = float(value.replace(" ", ""))
+        response = float((value.replace(" ", "")).replace(",", "."))
     elif field == 'tenderPeriod.endDate':
         list = re.search(u'з (?P<startDate>[\d\.\s\:]+) по (?P<endDate>[\d\.\s\:]+)', value)
         value = list.group('endDate')

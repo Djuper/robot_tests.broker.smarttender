@@ -1464,7 +1464,8 @@ Ignore cancellation error
   [Arguments]  ${username}  ${contract_uaid}  ${field_name}
   [Documentation]  Отримує значення поля field_name для контракту contract_uaid.
   ...  [Повертає] field_value - значення поля.
-  Пошук тендера по ідентифікатору  ${username}  ${contract_uaid}
+  ${tender_uaid}  Evaluate  ${contract_uaid}[:-3]
+  smarttender.Пошук тендера по ідентифікатору  ${username}  ${contract_uaid}
   Відкрити вкладку Завершення та виконання умов приватизації
   ${field_value}  Отримати та обробити інформацію із договору  ${field_name}
   [Return]  ${field_value}
@@ -1474,7 +1475,8 @@ Ignore cancellation error
   [Arguments]  ${username}  ${contract_uaid}  ${item_id}  ${field_name}
   [Documentation]  Отримує значення поля field_name з активу з item_id контракту contract_uaid.
   ...  [Повертає] field_value - значення поля.
-  Пошук тендера по ідентифікатору  ${username}  ${contract_uaid}
+  ${tender_uaid}  Evaluate  ${contract_uaid}[:-3]
+  smarttender.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
   Відкрити вкладку Завершення та виконання умов приватизації
   ${field_value}  Отримати та обробити інформацію із договору  ${field_name}_in_contract
   [Return]  ${field_value}
