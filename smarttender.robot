@@ -1465,7 +1465,7 @@ Ignore cancellation error
   [Documentation]  Отримує значення поля field_name для контракту contract_uaid.
   ...  [Повертає] field_value - значення поля.
   ${tender_uaid}  Evaluate  "${contract_uaid}"[:-3]
-  smarttender.Пошук тендера по ідентифікатору  ${username}  ${contract_uaid}
+  smarttender.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
   Відкрити вкладку Завершення та виконання умов приватизації
   ${field_value}  Отримати та обробити інформацію із договору  ${field_name}
   [Return]  ${field_value}
