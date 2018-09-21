@@ -966,7 +966,6 @@ waiting skeleton
   [Arguments]  ${username}  ${tender_uaid}  ${filepath}  ${award_index}
   [Documentation]  Завантажує протокол аукціону, який знаходиться по шляху filepath і має documentType = admissionProtocol, до ставки кандидата на кваліфікацію аукціону tender_uaid користувачем username. Ставка, до якої потрібно додавати протокол визначається за award_index.
   ...  [Повертає]  reply (словник з інформацією про документ).
-  debug
   ${block}  Розгорнути потрібний аукціон  ${award_index}
   Відкрити бланк протоколу погодження в авард
   Завантажити файл у протокол погодження в авард  ${filepath}
