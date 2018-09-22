@@ -74,9 +74,10 @@ Login
 Оновити сторінку з об'єктом МП
   [Arguments]  ${username}  ${tender_uaid}
   [Documentation]  Оновлює сторінку з об’єктом МП для отримання потенційно оновлених даних.
-  Run Keyword If
-  ...  "${username}" != "SmartTender_Owner" or "${username}" == "SmartTender_Owner" and '${mode}' == 'auctions'
-  ...  Оновити сторінку з об'єктом МП continue
+  #Run Keyword If
+  #...  "${username}" != "SmartTender_Owner" or "${username}" == "SmartTender_Owner" and '${mode}' == 'auctions'
+  #...  Оновити сторінку з об'єктом МП continue
+  Оновити сторінку з об'єктом МП continue
 
 Оновити сторінку з об'єктом МП continue
   [Documentation]  можно спробувати прискорити синхронізацію використовуючи
