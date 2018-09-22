@@ -1150,8 +1150,8 @@ waiting skeleton
 
 
 Натиснути Аукціон завершено. Договір підписано
-  Click Element  css=[data-qa="finishHim"]
-  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
+  Run Keyword And Ignore Error  Click Element  css=[data-qa="finishHim"]
+  Run Keyword And Ignore Error  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
 
 
 ########################################################################
