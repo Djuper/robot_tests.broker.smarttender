@@ -90,10 +90,12 @@ Login
   ...     ELSE IF         '${mode}' == 'contracts'          Set Variable  6
   ${time}  Get Current Date
   ${last_modification_date}  convert_datetime_to_kot_format  ${time}
-  Run Keyword If  "${mode}" == "auctions" and "${role}" == "tender_owner" and "${TESTNAME}" != "Можливість скасувати рішення кваліфікації другим кандидатом" and "${TESTNAME}" != "Можливість знайти процедуру по ідентифікатору" and "запитання" not in "${TESTNAME}"  No Operation
-  ...  ELSE  Run Keywords
-  ...  Go To  http://test.smarttender.biz/ws/webservice.asmx/Execute?calcId=_QA.GET.LAST.SYNCHRONIZATION&args={"SEGMENT":${n}}
-  ...  AND  Wait Until Keyword Succeeds  10min  5sec  waiting_for_synch  ${last_modification_date}
+  #Run Keyword If  "${mode}" == "auctions" and "${role}" == "tender_owner" and "${TESTNAME}" != "Можливість скасувати рішення кваліфікації другим кандидатом" and "${TESTNAME}" != "Можливість знайти процедуру по ідентифікатору" and "запитання" not in "${TESTNAME}"  No Operation
+  #...  ELSE  Run Keywords
+  #...  Go To  http://test.smarttender.biz/ws/webservice.asmx/Execute?calcId=_QA.GET.LAST.SYNCHRONIZATION&args={"SEGMENT":${n}}
+  #...  AND  Wait Until Keyword Succeeds  10min  5sec  waiting_for_synch  ${last_modification_date}
+  Go To  http://test.smarttender.biz/ws/webservice.asmx/Execute?calcId=_QA.GET.LAST.SYNCHRONIZATION&args={"SEGMENT":${n}}
+  Wait Until Keyword Succeeds  10min  5sec  waiting_for_synch  ${last_modification_date}
 
 waiting_for_synch
   [Arguments]  ${last_modification_date}
