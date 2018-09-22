@@ -856,6 +856,7 @@ waiting skeleton
 Отримати інформацію із тендера
   [Arguments]  ${username}  ${tender_uaid}  ${field_name}
   [Documentation]  Отримує значення поля field_name для лоту tender_uaid.
+  Обновити сторінку за необхідністю  ${username}  ${tender_uaid}
   ${reply}  Отримати та обробити дані із тендера  ${field_name}
   [Return]  ${reply}
 
@@ -1596,3 +1597,11 @@ Ignore cancellation error
   ${text}  Get Text  ${locator}
   ${field_value}  convert_contract_result  ${field_name}  ${text}
   [Return]  ${field_value}
+
+
+Обновити сторінку за необхідністю
+  [Arguments]  ${username}  ${tender_uaid}
+  ${list}  Set Variable
+  ...  Можливість звірити статус процедури в період кваліфікації
+  ...  Something else
+  Run Keyword If  "${TESTNAME}" in ${list}  smarttender.Оновити сторінку з тендером  ${username}  ${tender_uaid}
