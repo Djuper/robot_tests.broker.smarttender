@@ -1146,7 +1146,6 @@ waiting skeleton
 Підтвердити підписання контракту
   [Arguments]  ${username}  ${tender_uaid}  ${contract_num}
   [Documentation]  Переводить договір під номером contract_num до аукціону tender_uaid в статус active.
-  Розгорнути потрібний авард  ${contract_num}
   Натиснути Аукціон завершено. Договір підписано
 
 
