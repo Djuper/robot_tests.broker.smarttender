@@ -1094,6 +1094,7 @@ waiting skeleton
 
 Розгорнути потрібний авард
   [Arguments]  ${contract_num}
+  Sleep  2
   ${text}  Get Text  xpath=(//h4[contains(text(), 'Результати аукціону')]/following-sibling::div[not(@class)])[1]//*[@class="ivu-row"]//div[3]//p[2]
   ${length}  Get Length  ${text}
   ${contract_num}  Run Keyword If  ${length} == 0  Set Variable  2  ELSE  Set Variable  1
@@ -1146,12 +1147,13 @@ waiting skeleton
 Підтвердити підписання контракту
   [Arguments]  ${username}  ${tender_uaid}  ${contract_num}
   [Documentation]  Переводить договір під номером contract_num до аукціону tender_uaid в статус active.
+  Розгорнути потрібний авард  ${contract_num}
   Натиснути Аукціон завершено. Договір підписано
 
 
 Натиснути Аукціон завершено. Договір підписано
-  Run Keyword And Ignore Error  Click Element  css=[data-qa="finishHim"]
-  Run Keyword And Ignore Error  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
+  Click Element  css=[data-qa="finishHim"]
+  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
 
 
 ########################################################################
