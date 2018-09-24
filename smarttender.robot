@@ -1553,6 +1553,8 @@ Ignore cancellation error
   [Documentation]  В третій майлстоун передається статус notMet(Кнопка в інтерфейсі “Умови продажу не виконано”)
   Відкрити вкладку Завершення та виконання умов приватизації
   Відкрити бланк умови продажу не виконано
+  ${file_path}  ${file_name}  ${file_content}=  create_fake_doc
+  Choose File  //*[@class="action-block-item"]//input[@type='file']  ${file_path}
   Натиснути submit
 
 
@@ -1596,8 +1598,8 @@ Ignore cancellation error
 
 
 Відкрити бланк про відсутність наказу
-  Scroll Page To Element XPATH  //*[data-qa="mandateNegativeAction"]
-  Run Keyword And Ignore Error  Відкрити бланк  //*[data-qa="mandateNegativeAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="mandateNegativeAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="mandateNegativeAction"]
 
 
 Відкрити бланк умови продажу виконано
@@ -1606,8 +1608,8 @@ Ignore cancellation error
 
 
 Відкрити бланк умови продажу не виконано
-  Scroll Page To Element XPATH  //*[@data-qa="termsComplyingPositiveAction"]
-  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="termsComplyingPositiveAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="termsComplyingNegativeAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="termsComplyingNegativeAction"]
 
 
 Отримати та обробити інформацію із договору
