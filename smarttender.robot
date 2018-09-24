@@ -1518,7 +1518,6 @@ Ignore cancellation error
   Відкрити вкладку Завершення та виконання умов приватизації
   Відкрити бланк наказ про завершення приватизації
   Choose File  //*[@class="action-block-item"]//input[@type='file']  ${file_path}
-  Натиснути submit
 
 
 Вказати дату прийняття наказу
