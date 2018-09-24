@@ -87,7 +87,7 @@ Login
   ${n}    Run Keyword If  '${mode}' == 'assets'             Set Variable  7
   ...     ELSE IF         '${mode}' == 'lots'               Set Variable  8
   ...     ELSE IF         '${mode}' == 'auctions'           Set Variable  6
-  ...     ELSE IF         '${mode}' == 'contracts'          Set Variable  6
+  ...     ELSE IF         '${mode}' == 'contracts'          Set Variable  11
   ${time}  Get Current Date
   ${last_modification_date}  convert_datetime_to_kot_format  ${time}
   #Run Keyword If  "${mode}" == "auctions" and "${role}" == "tender_owner" and "${TESTNAME}" != "Можливість скасувати рішення кваліфікації другим кандидатом" and "${TESTNAME}" != "Можливість знайти процедуру по ідентифікатору" and "запитання" not in "${TESTNAME}"  No Operation
@@ -1099,6 +1099,7 @@ waiting skeleton
   ${length}  Get Length  ${text}
   ${contract_num}  Run Keyword If  ${length} == 0  Set Variable  2  ELSE  Set Variable  1
   ${block}  Set Variable  xpath=(//h4[contains(text(), 'Результати аукціону')]/following-sibling::div[not(@class)])[${contract_num}]
+  Scroll Page To Element XPATH  ${block}//i
   ${status}  Run Keyword And Return Status  Wait Until Page Contains Element  ${block}//i[contains(@class, 'dropup')]
   Run Keyword If  '${status}' == 'False'  Click Element  ${block}//i
   ${status}  Run Keyword And Return Status  Wait Until Page Contains Element  ${block}//i[contains(@class, 'dropup')]
@@ -1110,6 +1111,7 @@ waiting skeleton
   [Arguments]  ${award_index}
   ${award_index}  Evaluate  ${award_index}+1
   ${block}  Set Variable  xpath=(//h4[contains(text(), 'Результати аукціону')]/following-sibling::div[not(@class)])[${award_index}]
+  Scroll Page To Element XPATH  ${block}//i
   ${status}  Run Keyword And Return Status  Wait Until Page Contains Element  ${block}//i[contains(@class, 'dropup')]
   Run Keyword If  '${status}' == 'False'  Run Keyword And Ignore Error  Click Element  ${block}//i
   ${status}  Run Keyword And Return Status  Wait Until Page Contains Element  ${block}//i[contains(@class, 'dropup')]
@@ -1141,7 +1143,8 @@ waiting skeleton
 
 Натиснути submit
   Run Keyword And Ignore Error  Click Element  css=[data-qa="submit"]
-  Run Keyword And Ignore Error  Wait Until Element Is Not Visible  css=[data-qa="submit"]  60
+  ${status}  Run Keyword And Return Status  Wait Until Element Is Not Visible  css=[data-qa="submit"]  60
+  Run Keyword If  '${status}' == 'False'  Натиснути submit
 
 
 Підтвердити підписання контракту
@@ -1152,8 +1155,11 @@ waiting skeleton
 
 
 Натиснути Аукціон завершено. Договір підписано
-  Click Element  css=[data-qa="finishHim"]
-  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
+  Sleep  3
+  Scroll Page To Element XPATH  //*[@data-qa="finishHim"]
+  Click Element  //*[@data-qa="finishHim"]
+  ${status}  Run Keyword And Return Status  Wait Until Element Is Not Visible  css=[data-qa="finishHim"]  60
+  Run Keyword If  '${status}' == 'False'  Натиснути Аукціон завершено. Договір підписано
 
 
 ########################################################################
@@ -1464,7 +1470,7 @@ Ignore cancellation error
   [Documentation]  використовується тільки для брокера Квінти, тому його не потрібно реалізовувати
   ...  лише додати в драйвер свого майданчика
   ...  Змінює власника контракту і активує його.
-  Sleep  250
+  No Operation
 
 
 Отримати інформацію із договору
@@ -1553,7 +1559,9 @@ Ignore cancellation error
 
 #########################
 Відкрити вкладку Завершення та виконання умов приватизації
-  ${status}  Run Keyword And Return Status  Page Should Contain Element  //*[contains(@class, 'active') and contains(text(), "Завершення та виконання умов приватизації")]
+  ${selector}  Set Variable  //*[contains(@class, "active") and contains(text(), "Завершення та виконання умов приватизації")]
+  Scroll Page To Element XPATH  ${selector}
+  ${status}  Run Keyword And Return Status  Page Should Contain Element  ${selector}
   Run Keyword if  '${status}' == 'False'  Run Keywords
   ...  Click Element  //*[contains(@class, "ivu-tabs-tab") and contains(., "Завершення та виконання умов приватизації")]
   ...  AND  Wait Until Page Contains Element  //*[contains(@class, 'active') and contains(text(), "Завершення та виконання умов приватизації")]
@@ -1574,27 +1582,33 @@ Ignore cancellation error
 
 
 Відкрити бланк дати отримання оплати
+  Scroll Page To Element XPATH  //*[@data-qa="paymentPositiveAction"]
   Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="paymentPositiveAction"]
 
 
 Відкрити бланк оплата відсутня
-  Run Keyword And Ignore Error  Відкрити бланк  css=[data-qa="paymentNegativeAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="paymentNegativeAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="paymentNegativeAction"]
 
 
 Відкрити бланк наказ про завершення приватизації
-  Run Keyword And Ignore Error  Відкрити бланк  css=[data-qa="mandatePositiveAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="mandatePositiveAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="mandatePositiveAction"]
 
 
 Відкрити бланк про відсутність наказу
-  Run Keyword And Ignore Error  Відкрити бланк  css=[data-qa="mandateNegativeAction"]
+  Scroll Page To Element XPATH  //*[data-qa="mandateNegativeAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[data-qa="mandateNegativeAction"]
 
 
 Відкрити бланк умови продажу виконано
-  Run Keyword And Ignore Error  Відкрити бланк  css=[data-qa="termsComplyingPositiveAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="termsComplyingPositiveAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="termsComplyingPositiveAction"]
 
 
 Відкрити бланк умови продажу не виконано
-  Run Keyword And Ignore Error  Відкрити бланк  css=[data-qa="termsComplyingPositiveAction"]
+  Scroll Page To Element XPATH  //*[@data-qa="termsComplyingPositiveAction"]
+  Run Keyword And Ignore Error  Відкрити бланк  //*[@data-qa="termsComplyingPositiveAction"]
 
 
 Отримати та обробити інформацію із договору
@@ -1611,3 +1625,15 @@ Ignore cancellation error
   ...  Можливість звірити статус процедури в період кваліфікації
   ...  Something else
   Run Keyword If  "${TESTNAME}" in ${list}  smarttender.Оновити сторінку з тендером  ${username}  ${tender_uaid}
+
+
+Scroll Page To Element XPATH
+  [Arguments]    ${xpath}
+  Run Keyword And Ignore Error
+  ...  Execute JavaScript  document.evaluate('${xpath.replace("xpath=", "")}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});
+  Run Keyword And Ignore Error
+  ...  Execute JavaScript  document.evaluate("${xpath.replace('xpath=', '')}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});
+
+
+Scroll Page To Top
+  Execute JavaScript  window.scrollTo(0,0);
