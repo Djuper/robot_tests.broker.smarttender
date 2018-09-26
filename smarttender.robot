@@ -1479,6 +1479,7 @@ Ignore cancellation error
   [Arguments]  ${username}  ${contract_uaid}  ${item_id}  ${field_name}
   [Documentation]  Отримує значення поля field_name з активу з item_id контракту contract_uaid.
   ...  [Повертає] field_value - значення поля.
+  Обновити сторінку за необхідністю  ${username}  ${tender_uaid}
   ${tender_uaid}  Evaluate  "${contract_uaid}"[:-3]
   smarttender.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
   Відкрити вкладку Завершення та виконання умов приватизації
@@ -1615,6 +1616,7 @@ Ignore cancellation error
   [Arguments]  ${username}  ${tender_uaid}
   ${list}  Set Variable
   ...  Можливість звірити статус процедури в період кваліфікації_SmartTender_Owner
+  ...  Відображення опису активу_SmartTender_Viewer
   ...  Something else
   Run Keyword If  "${TESTNAME}_${username}" in ${list}  smarttender.Оновити сторінку з тендером  ${username}  ${tender_uaid}
 
